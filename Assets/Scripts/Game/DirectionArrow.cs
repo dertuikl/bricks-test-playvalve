@@ -1,4 +1,3 @@
-using System;
 using Game.Core;
 using UnityEngine;
 using Zenject;
@@ -42,7 +41,6 @@ public class DirectionArrow : MonoBehaviour
             return;
         }
         
-        Debug.Log(direction);
         var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
         rectTransform.rotation = Quaternion.Euler(0, 0, angle);
     }
