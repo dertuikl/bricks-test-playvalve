@@ -5,11 +5,9 @@ namespace Game.Core.Screens
 {
     public class GameScreen : BaseScreen
     {
-        public async override void OpenScreen()
+        public override void OpenScreen()
         {
-            await Task.Delay(2000);
             
-            ProcessGameEnd();
         }
 
         private void ProcessGameEnd()

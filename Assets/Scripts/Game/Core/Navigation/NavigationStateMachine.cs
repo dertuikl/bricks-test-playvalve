@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Core.DataSave;
 using Game.Core.Screens;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Core.Navigation
 {
@@ -17,11 +19,18 @@ namespace Game.Core.Navigation
         [SerializeField] 
         private BaseScreen[] screens;
 
+        private UserData userData;
         private Dictionary<string, BaseScreen> screensDictionary;
         private BaseScreen currentScreen;
 
         private string FallbackScreen => ScreenNames.LobbyScreen;
 
+        [Inject]
+        public void Construct(UserData userData)
+        {
+            this.userData = userData;
+        }
+        
         private void Start()
         {
             CreateScreensDictionary();
@@ -61,8 +70,10 @@ namespace Game.Core.Navigation
             newScreen.OpenScreen();
 
             currentScreen = newScreen;
-            
-            Debug.Log("Opened new screen: " + newScreenName);
+
+            if (userData.LogsEnabled) {
+                Debug.Log("Opened new screen: " + newScreenName);
+            }
         }
         
         private void CloseCurrentScreen()
