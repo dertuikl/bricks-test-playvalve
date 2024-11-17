@@ -1,4 +1,3 @@
-using Game.LevelsManagement;
 using UnityEngine;
 using Zenject;
 
@@ -23,11 +22,6 @@ namespace Game.Gameplay
         {
             var screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
             Debug.Log("Setup Grid Bounds");
-        }
-    
-        public void BuildLevel(LevelConfig config)
-        {
-            Debug.Log($"Building Level {config.Level}");
         }
     }
 }

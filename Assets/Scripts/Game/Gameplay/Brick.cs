@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Gameplay
 {
@@ -13,6 +14,16 @@ namespace Game.Gameplay
 
         public int Health { get; private set; }
 
+        public int Points = 100;
+        
+        private IScoreManager scoreManager;
+
+        [Inject]
+        public void Construct(IScoreManager scoreManager)
+        {
+            this.scoreManager = scoreManager;
+        }
+        
         private void Start()
         {
             Health = states.Length;
@@ -29,6 +40,7 @@ namespace Game.Gameplay
         private void ProcessHit()
         {
             Health--;
+            scoreManager.AddScore(Points);
             RefreshVisualState();
 
             if (Health <= 0) {

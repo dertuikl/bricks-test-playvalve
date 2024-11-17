@@ -1,4 +1,4 @@
-using Game.LevelsManagement;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,20 +7,60 @@ namespace Game.Gameplay
     public class GameController : MonoBehaviour
     {
         [SerializeField]
-        private LevelBuilder levelBuilder;
+        private GameEndTrigger gameEndTrigger;
         
-        private ILevelConfigProvider configProvider;
+        private UserInputController userInputController;
+        
+        public event Action RoundEnd;
+        public event Action GameEnd;
         
         [Inject]
-        public void Construct(ILevelConfigProvider configProvider)
+        public void Construct(UserInputController userInputController)
         {
-            this.configProvider = configProvider;
+            this.userInputController = userInputController;
+        }
+
+        private void Start()
+        {
+            userInputController.PointerUp += StartRound;
+        }
+
+        private void SetupBallPosition()
+        {
+            
+        }
+
+        private void StartRound(Vector2 direction)
+        {
+            gameEndTrigger.PlayerEnteredTrigger += EndRound;
+        }
+
+        private void EndRound()
+        {
+            gameEndTrigger.PlayerEnteredTrigger -= EndRound;
+            RoundEnd?.Invoke();
+            
+            TryEndGame();
+        }
+
+        private void TryEndGame()
+        {
+            if (false) {
+                // punishment (subtract 1 ball from queue)
+                SetupBallPosition();
+            } else {
+                GameOver();
+            }
         }
         
-        public void SetupLevel()
+        private void GameOver()
         {
-            var levelConfig = configProvider.GetLevelConfig();
-            levelBuilder.BuildLevel(levelConfig);
+            GameEnd?.Invoke();
+        }
+
+        private void OnDestroy()
+        {
+            userInputController.PointerUp -= StartRound;
         }
     }
 }

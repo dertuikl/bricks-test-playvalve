@@ -13,7 +13,7 @@ namespace Game.Core.Screens
         public override void OpenScreen()
         {
             gameController = Instantiate(gameControllerPrefab);
-            gameController.SetupLevel();
+            gameController.GameEnd += ProcessGameEnd;
         }
 
         private void ProcessGameEnd()

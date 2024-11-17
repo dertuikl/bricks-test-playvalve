@@ -1,4 +1,3 @@
-using Game.LevelsManagement;
 using Game.Core.DataSave;
 using Game.Core.Navigation;
 using Game.Gameplay;
@@ -15,7 +14,7 @@ namespace Zenject
             Container.BindInterfacesTo<UserData>().AsSingle();
             Container.Bind<Camera>().FromInstance(Camera.main).AsSingle();
             Container.BindInterfacesTo<BallAnchorPointProvider>().AsSingle();
-            Container.BindInterfacesTo<LevelConfigProvider>().AsSingle();
+            Container.BindInterfacesTo<ScoreManager>().AsSingle();
         }
     }
 }
