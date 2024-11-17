@@ -7,10 +7,13 @@ public class Ball : MonoBehaviour
 {
     [SerializeField]
     private float speed = 500f;
+    
+    [SerializeField]
+    private new Rigidbody2D rigidbody;
+    
 
     private UserInputController inputController;
     private IBallAnchorPointProvider anchorPointProvider;
-    public Rigidbody2D Rigidbody { get; private set; }
 
     [Inject]
     public void Construct(UserInputController inputController,
@@ -22,7 +25,6 @@ public class Ball : MonoBehaviour
     
     private void Awake()
     {
-        Rigidbody = GetComponent<Rigidbody2D>();
         inputController.PointerUp += StartMovement;
         
         SetupStartPosition();
@@ -37,7 +39,7 @@ public class Ball : MonoBehaviour
 
     private void StartMovement(Vector2 direction)
     {
-        Rigidbody.AddForce(direction.normalized * speed);
+        rigidbody.AddForce(direction.normalized * speed);
     }
 
     private void OnDestroy()
