@@ -445,6 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 602b00012f3e4135ada4d7030d48e847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameControllerPrefab: {fileID: 7780970624675433441, guid: 583cc22148db65c49819040c8e31ddaf, type: 3}
 --- !u!224 &4268299838986809175 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1367300531702371227, guid: 94119876b20656348bebaafb5e7af8b9, type: 3}

@@ -19,14 +19,14 @@ namespace Game.Core.Navigation
         [SerializeField] 
         private BaseScreen[] screens;
 
-        private UserData userData;
+        private IUserData userData;
         private Dictionary<string, BaseScreen> screensDictionary;
         private BaseScreen currentScreen;
 
         private string FallbackScreen => ScreenNames.LobbyScreen;
 
         [Inject]
-        public void Construct(UserData userData)
+        public void Construct(IUserData userData)
         {
             this.userData = userData;
         }
