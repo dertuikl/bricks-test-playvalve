@@ -1,19 +1,21 @@
-using Game;
-using Game.Core;
+using Game.LevelsManagement;
 using Game.Core.DataSave;
 using Game.Core.Navigation;
+using Game.Gameplay;
 using UnityEngine;
-using Zenject;
 
-public class RootInstaller : MonoInstaller
+namespace Zenject
 {
-    public override void InstallBindings()
+    public class RootInstaller : MonoInstaller
     {
-        Container.BindInterfacesTo<NavigationStateMachine>().FromComponentsInHierarchy().AsSingle().NonLazy();
-        Container.Bind<UserInputController>().FromComponentsInHierarchy().AsSingle();
-        Container.BindInterfacesTo<UserData>().AsSingle();
-        Container.Bind<Camera>().FromInstance(Camera.main).AsSingle();
-        Container.BindInterfacesTo<BallAnchorPointProvider>().AsSingle();
-        Container.BindInterfacesTo<LevelConfigProvider>().AsSingle();
+        public override void InstallBindings()
+        {
+            Container.BindInterfacesTo<NavigationStateMachine>().FromComponentsInHierarchy().AsSingle().NonLazy();
+            Container.Bind<UserInputController>().FromComponentsInHierarchy().AsSingle();
+            Container.BindInterfacesTo<UserData>().AsSingle();
+            Container.Bind<Camera>().FromInstance(Camera.main).AsSingle();
+            Container.BindInterfacesTo<BallAnchorPointProvider>().AsSingle();
+            Container.BindInterfacesTo<LevelConfigProvider>().AsSingle();
+        }
     }
 }

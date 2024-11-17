@@ -1,8 +1,3 @@
-using System;
-using System.Threading.Tasks;
-using Game.Core.Navigation;
-using UnityEngine;
-
 namespace Game.Core.Screens
 {
     public class LobbyScreen : BaseScreen

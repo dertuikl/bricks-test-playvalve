@@ -1,11 +1,11 @@
 using Game.Core.DataSave;
 using UnityEngine;
 
-namespace Game
+namespace Game.LevelsManagement
 {
     public class LevelConfigProvider : ILevelConfigProvider
     {
-        private IUserData userData;
+        private readonly IUserData userData;
         
         public LevelConfigProvider(IUserData userData)
         {

@@ -1,4 +1,4 @@
-namespace Game
+namespace Game.LevelsManagement
 {
     public interface ILevelConfigProvider
     {

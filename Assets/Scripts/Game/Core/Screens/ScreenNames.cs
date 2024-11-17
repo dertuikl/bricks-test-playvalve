@@ -1,6 +1,6 @@
-namespace Game.Core.Navigation
+namespace Game.Core.Screens
 {
-    public class ScreenNames
+    public static class ScreenNames
     {
         public const string LobbyScreen = "lobby_screen";
         public const string GameScreen = "game_screen";

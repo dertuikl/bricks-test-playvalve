@@ -1,5 +1,3 @@
-using Game.Core.Navigation;
-
 namespace Game.Core.Screens
 {
     public class LeaderboardScreen : BaseScreen

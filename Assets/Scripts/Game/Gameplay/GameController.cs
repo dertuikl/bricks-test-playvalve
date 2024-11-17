@@ -1,23 +1,26 @@
-using Game;
+using Game.LevelsManagement;
 using UnityEngine;
 using Zenject;
 
-public class GameController : MonoBehaviour
+namespace Game.Gameplay
 {
-    [SerializeField]
-    private LevelBuilder levelBuilder;
-    
-    private ILevelConfigProvider configProvider;
-    
-    [Inject]
-    public void Construct(ILevelConfigProvider configProvider)
+    public class GameController : MonoBehaviour
     {
-        this.configProvider = configProvider;
-    }
-    
-    public void SetupLevel()
-    {
-        var levelConfig = configProvider.GetLevelConfig();
-        levelBuilder.BuildLevel(levelConfig);
+        [SerializeField]
+        private LevelBuilder levelBuilder;
+        
+        private ILevelConfigProvider configProvider;
+        
+        [Inject]
+        public void Construct(ILevelConfigProvider configProvider)
+        {
+            this.configProvider = configProvider;
+        }
+        
+        public void SetupLevel()
+        {
+            var levelConfig = configProvider.GetLevelConfig();
+            levelBuilder.BuildLevel(levelConfig);
+        }
     }
 }

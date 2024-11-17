@@ -1,6 +1,6 @@
 namespace Game.Core.DataSave
 {
-    public class UserData : IUserDataManager
+    public class UserData : IUserDataManager, IDebugState
     {
         public bool LogsEnabled { get; private set; } = false;
         public int Level { get; private set; } = 6;

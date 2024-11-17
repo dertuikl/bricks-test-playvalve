@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Core.DataSave;
 using Game.Core.Screens;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Game.Core.Navigation
@@ -13,22 +13,23 @@ namespace Game.Core.Navigation
     /// </summary>
     public class NavigationStateMachine : MonoBehaviour, INavigation
     {
+        [FormerlySerializedAs("container")]
         [SerializeField] 
-        private GameObject container;
+        private GameObject screenContainer;
 
         [SerializeField] 
         private BaseScreen[] screens;
 
-        private IUserData userData;
+        private IDebugState debugState;
         private Dictionary<string, BaseScreen> screensDictionary;
         private BaseScreen currentScreen;
 
         private string FallbackScreen => ScreenNames.LobbyScreen;
 
         [Inject]
-        public void Construct(IUserData userData)
+        public void Construct(IDebugState debugState)
         {
-            this.userData = userData;
+            this.debugState = debugState;
         }
         
         private void Start()
@@ -66,12 +67,12 @@ namespace Game.Core.Navigation
         private void OpenScreen(string newScreenName)
         {
             var newScreenPrefab = screensDictionary[newScreenName];
-            var newScreen = Instantiate(newScreenPrefab, container.transform);
+            var newScreen = Instantiate(newScreenPrefab, screenContainer.transform);
             newScreen.OpenScreen();
 
             currentScreen = newScreen;
 
-            if (userData.LogsEnabled) {
+            if (debugState.LogsEnabled) {
                 Debug.Log("Opened new screen: " + newScreenName);
             }
         }

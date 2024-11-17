@@ -1,5 +1,4 @@
-using System.Threading.Tasks;
-using Game.Core.Navigation;
+using Game.Gameplay;
 using UnityEngine;
 
 namespace Game.Core.Screens
@@ -24,7 +23,7 @@ namespace Game.Core.Screens
 
         public override void CloseScreen()
         {
-            
+            Destroy(gameController.gameObject);
         }
 
         public override string Name => ScreenNames.GameScreen;

@@ -1,49 +1,50 @@
-using System;
-using Game.Core;
 using UnityEngine;
 using Zenject;
 
-public class Ball : MonoBehaviour
+namespace Game.Gameplay
 {
-    [SerializeField]
-    private float speed = 500f;
-    
-    [SerializeField]
-    private new Rigidbody2D rigidbody;
-    
-
-    private UserInputController inputController;
-    private IBallAnchorPointProvider anchorPointProvider;
-
-    [Inject]
-    public void Construct(UserInputController inputController,
-        IBallAnchorPointProvider anchorPointProvider)
+    public class Ball : MonoBehaviour
     {
-        this.inputController = inputController;
-        this.anchorPointProvider = anchorPointProvider;
-    }
-    
-    private void Awake()
-    {
-        inputController.PointerUp += StartMovement;
+        [SerializeField]
+        private float speed = 500f;
         
-        SetupStartPosition();
-    }
-
-    private void SetupStartPosition()
-    {
-        if (anchorPointProvider.BallAnchorPoint != null) {
-            transform.position = anchorPointProvider.BallAnchorPoint.WorldPosition;
+        [SerializeField]
+        private new Rigidbody2D rigidbody;
+        
+    
+        private UserInputController inputController;
+        private IBallAnchorPointProvider anchorPointProvider;
+    
+        [Inject]
+        public void Construct(UserInputController inputController,
+            IBallAnchorPointProvider anchorPointProvider)
+        {
+            this.inputController = inputController;
+            this.anchorPointProvider = anchorPointProvider;
         }
-    }
-
-    private void StartMovement(Vector2 direction)
-    {
-        rigidbody.AddForce(direction.normalized * speed);
-    }
-
-    private void OnDestroy()
-    {
-        inputController.PointerUp -= StartMovement;
+        
+        private void Awake()
+        {
+            inputController.PointerUp += StartMovement;
+            
+            SetupStartPosition();
+        }
+    
+        private void SetupStartPosition()
+        {
+            if (anchorPointProvider.BallAnchorPoint != null) {
+                transform.position = anchorPointProvider.BallAnchorPoint.WorldPosition;
+            }
+        }
+    
+        private void StartMovement(Vector2 direction)
+        {
+            rigidbody.AddForce(direction.normalized * speed);
+        }
+    
+        private void OnDestroy()
+        {
+            inputController.PointerUp -= StartMovement;
+        }
     }
 }

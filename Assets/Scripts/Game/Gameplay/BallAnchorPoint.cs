@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 using Zenject;
 
-namespace Game
+namespace Game.Gameplay
 {
     public class BallAnchorPoint : MonoBehaviour
     {

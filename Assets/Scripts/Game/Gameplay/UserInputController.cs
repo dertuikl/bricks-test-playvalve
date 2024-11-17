@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Game.Core
+namespace Game.Gameplay
 {
     public class UserInputController : MonoBehaviour, IPointerDownHandler, IPointerMoveHandler, IPointerUpHandler
     {
