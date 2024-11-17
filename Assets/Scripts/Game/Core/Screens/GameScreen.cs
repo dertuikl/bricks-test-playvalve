@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Core.Screens
 {
-    public class GameScreen : BaseScreen
+    public class GameScreen : AnimatedScreen
     {
         [SerializeField]
         private GameController gameControllerPrefab;

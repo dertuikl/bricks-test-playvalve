@@ -16,11 +16,6 @@ namespace Game.Core.Screens
         
         public abstract void OpenScreen();
 
-        public virtual void OnClickCloseButton()
-        {
-            
-        }
-        
         public abstract void CloseScreen();
         
         public abstract string Name { get; }

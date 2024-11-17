@@ -3,7 +3,7 @@ using Game.Core.Navigation;
 
 namespace Game.Core.Screens
 {
-    public class GameEndScreen : BaseScreen
+    public class GameEndScreen : AnimatedScreen
     {
         public async override void OpenScreen()
         {
@@ -15,11 +15,6 @@ namespace Game.Core.Screens
         private void OpenLeaderboardsScreen()
         {
             Navigation.NavigateTo(ScreenNames.LeaderboardScreen);
-        }
-
-        public override void CloseScreen()
-        {
-            
         }
 
         public override string Name => ScreenNames.GameEndScreen;
