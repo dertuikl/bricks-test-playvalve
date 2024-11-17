@@ -1,3 +1,4 @@
+using System;
 using Game.Core;
 using UnityEngine;
 using Zenject;
@@ -49,5 +50,12 @@ public class DirectionArrow : MonoBehaviour
     {
         gameObject.SetActive(false);
         isEnabled = false;
+    }
+
+    private void OnDestroy()
+    {
+        inputController.PointerDown -= EnableArrow;
+        inputController.PointerMove -= RotateArrow;
+        inputController.PointerUp -= DisableArrow;
     }
 }

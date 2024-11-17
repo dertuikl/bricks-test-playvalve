@@ -1,14 +1,19 @@
 using Game;
 using UnityEngine;
+using Zenject;
 
 public class LevelBuilder : MonoBehaviour
 {
     private Camera mainCamera;
 
+    [Inject]
+    public void Construct(Camera mainCamera)
+    {
+        this.mainCamera = mainCamera;
+    }
+    
     private void Awake()
     {
-        mainCamera = Camera.main;
-        
         SetupGridBounds();
     }
 
