@@ -4,8 +4,10 @@ namespace Game.Core.DataSave
     {
         public bool LogsEnabled { get; private set; } = false;
         public int Score { get; private set; } = 0;
+        public int BestScore { get; private set; } = 0;
         
         public void SetLogsEnabled(bool logsEnabled) => LogsEnabled = logsEnabled;
         public void SetScore(int score) => Score = score;
+        public void SetBestScore(int score) => BestScore = score;
     }
 }

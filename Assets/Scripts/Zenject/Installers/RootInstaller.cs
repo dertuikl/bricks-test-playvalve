@@ -10,7 +10,7 @@ namespace Zenject
         public override void InstallBindings()
         {
             Container.BindInterfacesTo<NavigationStateMachine>().FromComponentsInHierarchy().AsSingle().NonLazy();
-            Container.Bind<UserInputController>().FromComponentsInHierarchy().AsSingle();
+            Container.Bind<UserInputController>().FromComponentsInHierarchy().AsTransient();
             Container.BindInterfacesTo<UserData>().AsSingle();
             Container.Bind<Camera>().FromInstance(Camera.main).AsSingle();
             Container.BindInterfacesTo<BallAnchorPointProvider>().AsSingle();

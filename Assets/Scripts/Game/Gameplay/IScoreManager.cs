@@ -4,5 +4,6 @@ namespace Game.Gameplay
     {
         void AddScore(int scoreToAdd);
         void ApplyMultiplier(float multiplier);
+        void SaveAndResetScore();
     }
 }

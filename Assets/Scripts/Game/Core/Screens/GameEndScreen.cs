@@ -56,8 +56,11 @@ namespace Game.Core.Screens
             while (!screenCloseRequested) {
                 yield return null;
             }
+
+            var scoreForCloseAnimation = userData.Score;
+            scoreManager.SaveAndResetScore();
             
-            yield return scoreEndGameAnimation.ShowScoreAnimation(userData.Score);
+            yield return scoreEndGameAnimation.ShowScoreAnimation(scoreForCloseAnimation);
             yield return new WaitForSeconds(closeDelay);
             OpenLeaderboardsScreen();
         }

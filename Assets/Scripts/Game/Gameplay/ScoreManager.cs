@@ -23,5 +23,14 @@ namespace Game.Gameplay
             userData.SetScore((int)(userData.Score * multiplier));
             Debug.Log($"Score multiplied by {multiplier}: {userData.Score}");
         }
+
+        public void SaveAndResetScore()
+        {
+            if (userData.Score > userData.BestScore) {
+                userData.SetBestScore(userData.Score);
+            }
+
+            userData.SetScore(0);
+        }
     }
 }
