@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -5,6 +6,8 @@ namespace Game.UI.Leadedboard
 {
     public class LeaderboardEntry : MonoBehaviour
     {
+        private const string HighlightTriggerKey = "Highlight";
+        
         [SerializeField]
         private TextMeshProUGUI positionText;
         
@@ -13,7 +16,7 @@ namespace Game.UI.Leadedboard
         
         [SerializeField]
         private TextMeshProUGUI scoreText;
-        
+
         public void FillWithInfo(int position, LeaderboardEntryInfo info)
         {
             positionText.text = position.ToString();
@@ -21,7 +24,7 @@ namespace Game.UI.Leadedboard
             scoreText.text = info.Score.ToString();
             
             if (info.IsPlayer) {
-                Debug.Log("Hightlight player entry");
+                GetComponent<Animator>().SetTrigger(HighlightTriggerKey);
             }
         }
     }

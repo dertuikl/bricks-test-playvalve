@@ -28,7 +28,7 @@ namespace Game.UI.Leadedboard
             var result = new LeaderboardEntryInfo[MaxLeaderboardCount];
             var userEntryInfo = new LeaderboardEntryInfo(UserName, userData.BestScore, true);
             result[0] = userEntryInfo;
-            for (var i = 1; i < MaxLeaderboardCount - 1; i++) {
+            for (var i = 1; i < MaxLeaderboardCount; i++) {
                 var score = random.Next(0, MaxScoreValue);
                 result[i] = new LeaderboardEntryInfo(GenerateRandomName(), score);
             }
