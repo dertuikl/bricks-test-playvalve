@@ -4,5 +4,6 @@ namespace Game.Core.DataSave
     {
         void SetScore(int score);
         void SetBestScore(int bestScore);
+        void ClearAllData();
     }
 }

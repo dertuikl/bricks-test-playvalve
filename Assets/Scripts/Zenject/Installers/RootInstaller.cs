@@ -1,6 +1,7 @@
 using Game.Core.DataSave;
 using Game.Core.Navigation;
 using Game.Gameplay;
+using Game.UI.Leadedboard;
 using UnityEngine;
 
 namespace Zenject
@@ -15,6 +16,7 @@ namespace Zenject
             Container.Bind<Camera>().FromInstance(Camera.main).AsSingle();
             Container.BindInterfacesTo<BallAnchorPointProvider>().AsSingle();
             Container.BindInterfacesTo<ScoreManager>().AsSingle();
+            Container.BindInterfacesTo<LeaderboardInfoGenerator>().AsSingle();
         }
     }
 }
