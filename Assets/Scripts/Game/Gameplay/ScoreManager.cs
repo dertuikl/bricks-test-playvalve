@@ -15,7 +15,13 @@ namespace Game.Gameplay
         public void AddScore(int scoreToAdd)
         {
             userData.SetScore(userData.Score + scoreToAdd);
-            Debug.Log(userData.Score);
+            Debug.Log($"Score added: {userData.Score}");
+        }
+
+        public void ApplyMultiplier(float multiplier)
+        {
+            userData.SetScore((int)(userData.Score * multiplier));
+            Debug.Log($"Score multiplied by {multiplier}: {userData.Score}");
         }
     }
 }
