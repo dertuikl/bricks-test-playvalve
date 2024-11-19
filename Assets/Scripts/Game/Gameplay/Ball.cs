@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using Zenject;
 
 namespace Game.Gameplay
 {
@@ -11,40 +11,16 @@ namespace Game.Gameplay
         [SerializeField]
         private new Rigidbody2D rigidbody;
         
-    
-        private UserInputController inputController;
-        private IBallAnchorPointProvider anchorPointProvider;
-    
-        [Inject]
-        public void Construct(UserInputController inputController,
-            IBallAnchorPointProvider anchorPointProvider)
+        public void StartMovement(Vector2 direction)
         {
-            this.inputController = inputController;
-            this.anchorPointProvider = anchorPointProvider;
+            rigidbody.velocity = (direction.normalized * speed) / 100f;
         }
-        
-        private void Awake()
+
+        private void OnCollisionEnter2D(Collision2D other)
         {
-            inputController.PointerUp += StartMovement;
-            
-            SetupStartPosition();
-        }
-    
-        private void SetupStartPosition()
-        {
-            if (anchorPointProvider.BallAnchorPoint != null) {
-                transform.position = anchorPointProvider.BallAnchorPoint.WorldPosition;
+            if (other.gameObject.GetComponent<GameEndTrigger>()) {
+                Destroy(gameObject, 2f);
             }
-        }
-    
-        private void StartMovement(Vector2 direction)
-        {
-            rigidbody.AddForce(direction.normalized * speed);
-        }
-    
-        private void OnDestroy()
-        {
-            inputController.PointerUp -= StartMovement;
         }
     }
 }

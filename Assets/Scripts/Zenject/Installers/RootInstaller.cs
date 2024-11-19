@@ -17,6 +17,7 @@ namespace Zenject
             Container.BindInterfacesTo<BallAnchorPointProvider>().AsSingle();
             Container.BindInterfacesTo<ScoreManager>().AsSingle();
             Container.BindInterfacesTo<LeaderboardInfoGenerator>().AsSingle();
+            Container.BindInterfacesTo<GameEvents>().AsSingle();
         }
     }
 }

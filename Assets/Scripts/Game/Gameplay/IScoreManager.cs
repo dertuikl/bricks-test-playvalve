@@ -1,3 +1,5 @@
+using System;
+
 namespace Game.Gameplay
 {
     public interface IScoreManager

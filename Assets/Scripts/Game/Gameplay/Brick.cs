@@ -17,11 +17,14 @@ namespace Game.Gameplay
         public int Points = 100;
         
         private IScoreManager scoreManager;
+        private IGameEventsInvoker gameEventsInvoker;
 
         [Inject]
-        public void Construct(IScoreManager scoreManager)
+        public void Construct(IScoreManager scoreManager,
+            IGameEventsInvoker gameEventsInvoker)
         {
             this.scoreManager = scoreManager;
+            this.gameEventsInvoker = gameEventsInvoker;
         }
         
         private void Start()
@@ -43,7 +46,7 @@ namespace Game.Gameplay
             scoreManager.AddScore(Points);
             RefreshVisualState();
 
-            if (Health <= 0) {
+            if (Health == 0) {
                 DestroyBrick();
             }
         }
@@ -58,6 +61,7 @@ namespace Game.Gameplay
         {
             // TODO: implement pooling
             Destroy(gameObject);
+            gameEventsInvoker?.InvokeBrickDestroyed(transform.position);
         }
     }
 }

@@ -9,58 +9,56 @@ namespace Game.Gameplay
         [SerializeField]
         private GameEndTrigger gameEndTrigger;
         
-        private UserInputController userInputController;
-        
-        public event Action RoundEnd;
         public event Action GameEnd;
         
+        private UserInputController userInputController;
+        private IGameEvents gameEvents;
+        private int activeBalls;
+        
         [Inject]
-        public void Construct(UserInputController userInputController)
+        public void Construct(UserInputController userInputController,
+            IGameEvents gameEvents)
         {
             this.userInputController = userInputController;
+            this.gameEvents = gameEvents;
         }
 
         private void Start()
         {
-            userInputController.PointerUp += StartRound;
+            userInputController.PointerUp += StartGame;
+            gameEvents.BallSpawned += OnBallSpawned;
         }
 
-        private void SetupBallPosition()
+        private void StartGame(Vector2 direction)
         {
+            gameEndTrigger.BallEnteredTrigger += OnBallEnteredGameEndTrigger;
+        }
+
+        private void OnBallSpawned()
+        {
+            activeBalls++;
+        }
+
+        private void OnBallEnteredGameEndTrigger()
+        {
+            activeBalls--;
             
-        }
-
-        private void StartRound(Vector2 direction)
-        {
-            gameEndTrigger.PlayerEnteredTrigger += EndRound;
-        }
-
-        private void EndRound()
-        {
-            gameEndTrigger.PlayerEnteredTrigger -= EndRound;
-            RoundEnd?.Invoke();
-            
-            TryEndGame();
-        }
-
-        private void TryEndGame()
-        {
-            if (false) {
-                // punishment (subtract 1 ball from queue)
-                SetupBallPosition();
-            } else {
+            if (activeBalls <= 0) {
                 GameOver();
             }
         }
         
         private void GameOver()
         {
+            gameEndTrigger.BallEnteredTrigger -= OnBallEnteredGameEndTrigger;
             GameEnd?.Invoke();
         }
 
         private void OnDestroy()
         {
-            userInputController.PointerUp -= StartRound;
+            userInputController.PointerUp += StartGame;
+            gameEvents.BallSpawned += OnBallSpawned;
+            gameEndTrigger.BallEnteredTrigger += OnBallEnteredGameEndTrigger;
         }
     }
 }
