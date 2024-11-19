@@ -64,7 +64,7 @@ namespace Game.Gameplay
         private void SpawnBall(Vector3 position)
         {
             var ball = Instantiate(ballPrefab, position, Quaternion.identity);
-            var direction = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+            var direction = new Vector2(Random.Range(-0.9f, 0.9f), Random.Range(-0.9f, 0.9f)).normalized;
             ball.StartMovement(direction);
             
             gameEventsInvoker.InvokeBallSpawned();

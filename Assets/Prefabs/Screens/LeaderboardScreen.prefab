@@ -496,7 +496,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 172
+  m_fontSize: 129
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1373,4 +1373,4 @@ MonoBehaviour:
   scrollRect: {fileID: 4723800061690330417}
   leaderboardEntriesContainer: {fileID: 1611097087577482118}
   entryPrefab: {fileID: 4693213238888646410, guid: fbe37e0fe04890a45ab8cba9d3a44f7c, type: 3}
-  autoScrollDuration: 0.5
+  autoScrollDurationRate: 1.5

@@ -12,6 +12,10 @@ PrefabInstance:
       value: Brick_1
       objectReference: {fileID: 0}
     - target: {fileID: 7952774039323371721, guid: 166720570aa5d824c8cb977c4f236b69, type: 3}
+      propertyPath: points
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952774039323371721, guid: 166720570aa5d824c8cb977c4f236b69, type: 3}
       propertyPath: states.Array.size
       value: 1
       objectReference: {fileID: 0}

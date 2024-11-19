@@ -1,11 +1,11 @@
-using System;
-
 namespace Game.Gameplay
 {
     public interface IScoreManager
     {
+        int CurrentScore { get; }
         void AddScore(int scoreToAdd);
         void ApplyMultiplier(float multiplier);
-        void SaveAndResetScore();
+        void SaveScore();
+        void ResetScore();
     }
 }

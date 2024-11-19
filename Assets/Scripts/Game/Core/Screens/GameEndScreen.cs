@@ -1,5 +1,4 @@
 using System.Collections;
-using Game.Core.DataSave;
 using Game.Gameplay;
 using Game.UI;
 using UnityEngine;
@@ -26,15 +25,12 @@ namespace Game.Core.Screens
         private float closeDelay = 1.0f;
         
         private IScoreManager scoreManager;
-        private IUserData userData;
         private bool screenCloseRequested;
 
         [Inject]
-        public void Construct(IScoreManager scoreManager,
-            IUserData userData)
+        public void Construct(IScoreManager scoreManager)
         {
             this.scoreManager = scoreManager;
-            this.userData = userData;
         }
 
         public override void OpenScreen()
@@ -45,7 +41,7 @@ namespace Game.Core.Screens
         private IEnumerator ScreenAnimation()
         {
             yield return gameOverTextTypeWriter.TypeWriterCoroutine();
-            yield return scoreEndGameAnimation.ShowScoreAnimation(userData.Score, true);
+            yield return scoreEndGameAnimation.ShowScoreAnimation(scoreManager.CurrentScore, true);
 
             var delay = new WaitForSeconds(delayBetweenButtonsShow);
             foreach (var container in buttons) {
@@ -56,11 +52,8 @@ namespace Game.Core.Screens
             while (!screenCloseRequested) {
                 yield return null;
             }
-
-            var scoreForCloseAnimation = userData.Score;
-            scoreManager.SaveAndResetScore();
             
-            yield return scoreEndGameAnimation.ShowScoreAnimation(scoreForCloseAnimation);
+            yield return scoreEndGameAnimation.ShowScoreAnimation(scoreManager.CurrentScore);
             yield return new WaitForSeconds(closeDelay);
             OpenLeaderboardsScreen();
         }
@@ -68,6 +61,7 @@ namespace Game.Core.Screens
         public void OnClickApplyMultiplierButton(int multiplierValue)
         {
             scoreManager.ApplyMultiplier(multiplierValue);
+            scoreManager.SaveScore();
             foreach (var button in buttons) {
                 button.interactable = false;
             }

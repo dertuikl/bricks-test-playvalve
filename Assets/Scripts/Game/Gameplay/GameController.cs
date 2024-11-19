@@ -13,20 +13,25 @@ namespace Game.Gameplay
         
         private UserInputController userInputController;
         private IGameEvents gameEvents;
+        private IScoreManager scoreManager;
         private int activeBalls;
         
         [Inject]
         public void Construct(UserInputController userInputController,
-            IGameEvents gameEvents)
+            IGameEvents gameEvents,
+            IScoreManager scoreManager)
         {
             this.userInputController = userInputController;
             this.gameEvents = gameEvents;
+            this.scoreManager = scoreManager;
         }
 
         private void Start()
         {
             userInputController.PointerUp += StartGame;
             gameEvents.BallSpawned += OnBallSpawned;
+            
+            scoreManager.ResetScore();
         }
 
         private void StartGame(Vector2 direction)

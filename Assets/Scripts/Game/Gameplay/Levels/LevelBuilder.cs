@@ -59,7 +59,7 @@ namespace Game.Gameplay.Levels
 
                     var brickInstance = Instantiate(brickData.Brick, transform);
                     brickInstance.transform.position = new Vector3(x, y, 0);
-                    brickInstance.transform.localScale = new Vector3(brickWidth * 0.9f, brickHeight * 0.9f, 1);
+                    brickInstance.transform.localScale = new Vector3(brickWidth * 0.95f, brickHeight * 0.95f, 1);
                 }
             }
         }

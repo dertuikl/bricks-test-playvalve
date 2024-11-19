@@ -20,18 +20,16 @@ namespace Game.Core.Screens
         private LeaderboardEntry entryPrefab;
 
         [SerializeField]
-        private float autoScrollDuration = 0.5f;
+        private float autoScrollDurationRate = 0.5f;
 
-        private IUserData userData;
         private ILeaderboardInfoGenerator leaderboardGenerator;
         private LeaderboardEntry playerEntry;
 
         public override string Name => ScreenNames.LeaderboardScreen;
 
         [Inject]
-        public void Construct(IUserData userData, ILeaderboardInfoGenerator leaderboardInfoGenerator)
+        public void Construct(ILeaderboardInfoGenerator leaderboardInfoGenerator)
         {
-            this.userData = userData;
             this.leaderboardGenerator = leaderboardInfoGenerator;
         }
 
@@ -68,27 +66,24 @@ namespace Game.Core.Screens
         private IEnumerator AutoScrollToPlayerPosition()
         {
             yield return new WaitForEndOfFrame();
-
-            scrollRect.onValueChanged.AddListener(a =>
-            {
-                Debug.Log($"{scrollRect.normalizedPosition}");
-            });
             
             var playerRectTransform = playerEntry.GetComponent<RectTransform>();
-            var playerPos = playerRectTransform.anchoredPosition.y - playerRectTransform.rect.height / 2;
+            var playerPos = playerRectTransform.anchoredPosition.y + playerRectTransform.rect.height / 2;
             var initialNormalisedPos = scrollRect.normalizedPosition.y;
-            var targetNormalisedPos = 1 + playerPos / scrollRect.content.rect.height;
+            var scrollRectDeltaHeight = scrollRect.content.rect.height - scrollRect.viewport.rect.height;
+            var targetNormalisedPos = Math.Clamp(1 + playerPos / scrollRectDeltaHeight, 0, 1);
             var timePassed = 0f;
+            var scrollTime = (1 - targetNormalisedPos) * autoScrollDurationRate;
 
-            while (timePassed < autoScrollDuration) {
+            while (timePassed < scrollTime) {
                 timePassed += Time.deltaTime;
 
-                if (timePassed > autoScrollDuration) {
-                    timePassed = autoScrollDuration;
+                if (timePassed > scrollTime) {
+                    timePassed = scrollTime;
                 }
 
                 var calculatedPos = Mathf.Lerp(initialNormalisedPos, targetNormalisedPos,
-                    timePassed / autoScrollDuration);
+                    timePassed / scrollTime);
                 scrollRect.verticalNormalizedPosition = calculatedPos;
 
                 yield return null;

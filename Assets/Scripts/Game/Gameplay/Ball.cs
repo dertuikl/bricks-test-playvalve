@@ -16,9 +16,10 @@ namespace Game.Gameplay
             rigidbody.velocity = (direction.normalized * speed) / 100f;
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.GetComponent<GameEndTrigger>()) {
+            if (other.gameObject.GetComponentInChildren<GameEndTrigger>()) {
+                // TODO: implement pooling
                 Destroy(gameObject, 2f);
             }
         }

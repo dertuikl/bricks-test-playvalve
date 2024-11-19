@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Game.Gameplay
@@ -12,9 +13,10 @@ namespace Game.Gameplay
         [SerializeField]
         private Color[] states;
 
-        public int Health { get; private set; }
-
-        public int Points = 100;
+        [SerializeField]
+        private int points = 100;
+        
+        private int health;
         
         private IScoreManager scoreManager;
         private IGameEventsInvoker gameEventsInvoker;
@@ -29,7 +31,7 @@ namespace Game.Gameplay
         
         private void Start()
         {
-            Health = states.Length;
+            health = states.Length;
             RefreshVisualState();
         }
 
@@ -42,18 +44,18 @@ namespace Game.Gameplay
 
         private void ProcessHit()
         {
-            Health--;
-            scoreManager.AddScore(Points);
+            health--;
+            scoreManager.AddScore(points);
             RefreshVisualState();
 
-            if (Health == 0) {
+            if (health == 0) {
                 DestroyBrick();
             }
         }
 
         private void RefreshVisualState()
         {
-            var index = Math.Clamp(Health - 1, 0, states.Length - 1);
+            var index = Math.Clamp(health - 1, 0, states.Length - 1);
             spriteRenderer.color = states[index];
         }
 
