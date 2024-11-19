@@ -28,14 +28,18 @@ namespace Game.Core.Screens
         public override string Name => ScreenNames.LeaderboardScreen;
 
         [Inject]
-        public void Construct(ILeaderboardInfoGenerator leaderboardInfoGenerator)
+        public void Construct(ILeaderboardInfoGenerator leaderboardGenerator)
         {
-            this.leaderboardGenerator = leaderboardInfoGenerator;
+            this.leaderboardGenerator = leaderboardGenerator;
         }
 
-        public override void OpenScreen()
+        private void Awake()
         {
             SetupLeaderboardView();
+        }
+        
+        protected override void OnScreenOpen()
+        {
             StartCoroutine(AutoScrollToPlayerPosition());
         }
 

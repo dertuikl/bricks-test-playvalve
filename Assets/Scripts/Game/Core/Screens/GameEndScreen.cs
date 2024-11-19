@@ -33,7 +33,7 @@ namespace Game.Core.Screens
             this.scoreManager = scoreManager;
         }
 
-        public override void OpenScreen()
+        protected override void OnScreenOpen()
         {
             StartCoroutine(ScreenAnimation());
         }

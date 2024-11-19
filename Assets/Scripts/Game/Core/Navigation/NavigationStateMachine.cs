@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Game.Core.DataSave;
 using Game.Core.Screens;
 using UnityEngine;
@@ -45,7 +46,7 @@ namespace Game.Core.Navigation
                 screen => screen);
         } 
 
-        public void NavigateTo(string screenName)
+        public async void NavigateTo(string screenName)
         {
             if (!screensDictionary.ContainsKey(screenName)) {
                 Debug.LogError($"Unable to open screen {screenName} as it is not in screen dictionary.");
@@ -58,17 +59,17 @@ namespace Game.Core.Navigation
                     return;
                 }
 
-                CloseCurrentScreen();
+                await CloseCurrentScreen();
             }
             
-            OpenScreen(screenName);
+            await OpenScreen(screenName);
         }
 
-        private void OpenScreen(string newScreenName)
+        private async Task OpenScreen(string newScreenName)
         {
             var newScreenPrefab = screensDictionary[newScreenName];
             var newScreen = Instantiate(newScreenPrefab, screenContainer.transform);
-            newScreen.OpenScreen();
+            await newScreen.OpenScreen();
 
             currentScreen = newScreen;
 
@@ -77,9 +78,9 @@ namespace Game.Core.Navigation
             }
         }
         
-        private void CloseCurrentScreen()
+        private async Task CloseCurrentScreen()
         {
-            currentScreen.CloseScreen();
+            await currentScreen.CloseScreen();
             Destroy(currentScreen.gameObject);
             currentScreen = null;
         }

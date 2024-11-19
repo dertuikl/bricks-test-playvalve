@@ -21,23 +21,32 @@ namespace Game.Gameplay
         /// Returns direction vector in relation to anchor point.
         /// </summary>
         public event Action<Vector2> PointerUp;
+
+        private bool isEnabled = true;
         
         private Vector2 GetDirection(PointerEventData eventData) => 
             (eventData.position - (Vector2)anchorRectTransform.position).normalized;
         
         public void OnPointerDown(PointerEventData eventData)
         {
-            PointerDown?.Invoke(GetDirection(eventData));
+            if (isEnabled) {
+                PointerDown?.Invoke(GetDirection(eventData));
+            }
         }
         
         public void OnPointerMove(PointerEventData eventData)
         {
-            PointerMove?.Invoke(GetDirection(eventData));
+            if (isEnabled) {
+                PointerMove?.Invoke(GetDirection(eventData));
+            }
         }
         
         public void OnPointerUp(PointerEventData eventData)
         {
-            PointerUp?.Invoke(GetDirection(eventData));
+            if (isEnabled) {
+                PointerUp?.Invoke(GetDirection(eventData));
+                isEnabled = false;
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Game.Core.Navigation;
 using UnityEngine;
 using Zenject;
@@ -14,9 +15,9 @@ namespace Game.Core.Screens
             Navigation = navigation;
         }
         
-        public abstract void OpenScreen();
+        public abstract Task OpenScreen();
 
-        public abstract void CloseScreen();
+        public abstract Task CloseScreen();
         
         public abstract string Name { get; }
     }

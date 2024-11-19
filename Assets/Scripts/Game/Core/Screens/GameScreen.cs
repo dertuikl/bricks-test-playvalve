@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using Game.Gameplay;
 using UnityEngine;
 
@@ -9,8 +11,8 @@ namespace Game.Core.Screens
         private GameController gameControllerPrefab;
         
         private GameController gameController;
-        
-        public override void OpenScreen()
+
+        private void Awake()
         {
             gameController = Instantiate(gameControllerPrefab);
             gameController.GameEnd += ProcessGameEnd;
@@ -21,7 +23,7 @@ namespace Game.Core.Screens
             Navigation.NavigateTo(ScreenNames.GameEndScreen);
         }
 
-        public override void CloseScreen()
+        protected override void OnScreenClose()
         {
             Destroy(gameController.gameObject);
         }
