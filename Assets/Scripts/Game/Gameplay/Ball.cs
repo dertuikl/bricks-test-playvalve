@@ -34,23 +34,23 @@ namespace Game.Gameplay
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.GetComponentInChildren<GameEndTrigger>()) {
-                DestroyBall();
+                DestroyBall(2f);
             }
         }
 
         private void OnGameOver()
         {
-            DestroyBall();
+            DestroyBall(10f);
         }
 
-        private void DestroyBall()
+        private void DestroyBall(float delay)
         {
             if (isDestroying) {
                 return;
             }
             
             // TODO: implement pooling
-            Destroy(gameObject, 2f);
+            Destroy(gameObject, delay);
             
             isDestroying = true;
         }
