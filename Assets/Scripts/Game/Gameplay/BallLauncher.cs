@@ -9,9 +9,6 @@ namespace Game.Gameplay
         [SerializeField]
         private Ball ballPrefab;
 
-        [SerializeField]
-        private float spawnTimeDelay = 0.3f;
-
         private UserInputController inputController;
         private IBallAnchorPointProvider anchorPointProvider;
         private IGameEvents gameEvents;
@@ -57,7 +54,7 @@ namespace Game.Gameplay
 
         private IEnumerator SpawnBallWithDelay(Vector3 position)
         {
-            yield return new WaitForSeconds(spawnTimeDelay);
+            yield return new WaitForSeconds(Brick.DestroyTimeDelay);
             SpawnBall(position);
         }
 

@@ -7,7 +7,7 @@ namespace Game.UI.Leadedboard
     public class LeaderboardInfoGenerator : ILeaderboardInfoGenerator
     {
         private const int MaxLeaderboardCount = 100;
-        private const int MaxScoreValue = 1000;
+        private const int MaxScoreValue = 500;
         private const string UserName = "You";
         
         private readonly List<string> firstNameParts = new() { "Kate", "Sara", "Jared", "TJ", "Valerie", "Stas", "Paul", "Ken", "Jade", "Ella", "Morris", "Ben"};

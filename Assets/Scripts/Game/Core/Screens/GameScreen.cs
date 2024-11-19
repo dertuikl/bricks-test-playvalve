@@ -1,7 +1,6 @@
-using System;
-using System.Threading.Tasks;
 using Game.Gameplay;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Core.Screens
 {
@@ -10,12 +9,19 @@ namespace Game.Core.Screens
         [SerializeField]
         private GameController gameControllerPrefab;
         
+        private IGameEvents gameEvents;
         private GameController gameController;
 
+        [Inject]
+        public void Construct(IGameEvents gameEvents)
+        {
+            this.gameEvents = gameEvents;
+        }
+        
         private void Awake()
         {
             gameController = Instantiate(gameControllerPrefab);
-            gameController.GameEnd += ProcessGameEnd;
+            gameEvents.GameOver += ProcessGameEnd;
         }
 
         private void ProcessGameEnd()

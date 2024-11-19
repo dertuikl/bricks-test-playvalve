@@ -7,6 +7,7 @@ namespace Game.Gameplay
     {
         public event Action<Vector3> BrickDestroyed;
         public event Action BallSpawned;
+        public event Action GameOver;
 
         public void InvokeBrickDestroyed(Vector3 brickPosition)
         {
@@ -16,6 +17,11 @@ namespace Game.Gameplay
         public void InvokeBallSpawned()
         {
             BallSpawned?.Invoke();
+        }
+
+        public void InvokeGameOver()
+        {
+            GameOver?.Invoke();
         }
     }
 }

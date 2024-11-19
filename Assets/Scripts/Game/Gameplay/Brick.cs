@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
@@ -7,6 +9,8 @@ namespace Game.Gameplay
 {
     public class Brick : MonoBehaviour
     {
+        public const float DestroyTimeDelay = 0.25f;
+        
         [SerializeField]
         private SpriteRenderer spriteRenderer;
 
@@ -49,7 +53,7 @@ namespace Game.Gameplay
             RefreshVisualState();
 
             if (health == 0) {
-                DestroyBrick();
+                StartCoroutine(DestroyBrick());
             }
         }
 
@@ -59,8 +63,10 @@ namespace Game.Gameplay
             spriteRenderer.color = states[index];
         }
 
-        private void DestroyBrick()
+        private IEnumerator DestroyBrick()
         {
+            yield return new WaitForSeconds(DestroyTimeDelay);
+            
             // TODO: implement pooling
             Destroy(gameObject);
             gameEventsInvoker?.InvokeBrickDestroyed(transform.position);

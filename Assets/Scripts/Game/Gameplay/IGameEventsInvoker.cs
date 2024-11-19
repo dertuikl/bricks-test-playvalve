@@ -6,5 +6,6 @@ namespace Game.Gameplay
     {
         void InvokeBrickDestroyed(Vector3 brickPosition);
         void InvokeBallSpawned();
+        void InvokeGameOver();
     }
 }

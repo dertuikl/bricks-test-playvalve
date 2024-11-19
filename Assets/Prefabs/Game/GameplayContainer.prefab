@@ -275,6 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEndTrigger: {fileID: 3268479947872260888}
+  levelBuilder: {fileID: 6082972550749642619}
 --- !u!114 &6082972550749642619
 MonoBehaviour:
   m_ObjectHideFlags: 0

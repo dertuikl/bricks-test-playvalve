@@ -9,7 +9,7 @@ namespace Game.Gameplay
         /// Returns destroyed brick position.
         /// </summary>
         event Action<Vector3> BrickDestroyed;
-        
         event Action BallSpawned;
+        event Action GameOver;
     }
 }
